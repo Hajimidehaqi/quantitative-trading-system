@@ -1,0 +1,45 @@
+# 量化交易系统配置文件
+
+# 数据源配置
+data:
+  source: "akshare"  # 支持: akshare, tushare, yfinance
+  symbol: "000001"   # 股票代码
+  start_date: "2023-01-01"
+  end_date: "2024-01-01"
+  frequency: "daily"  # daily, weekly, monthly
+  tushare_token: ""   # tushare token (可选，从 https://tushare.pro/ 获取)
+
+# 回测配置
+backtest:
+  initial_capital: 100000  # 初始资金
+  commission: 0.001  # 手续费率
+  slippage: 0.0  # 滑点（预留扩展）
+
+# 策略配置
+strategy:
+  name: "MovingAverage"  # 策略名称: MovingAverage, RSI, MACD
+  params:
+    short_window: 5   # 短期均线
+    long_window: 20   # 长期均线
+
+# 风险控制配置
+risk:
+  enabled: false  # 是否启用风险控制
+  stop_loss: 0.05  # 止损比例 (5%)
+  take_profit: null  # 止盈比例 (可选)
+  max_position: 1.0  # 最大仓位比例 (100%)
+  position_sizing: "fixed"  # 仓位管理方式: fixed, kelly, volatility
+
+# 参数优化配置
+optimization:
+  enabled: false  # 是否启用参数优化
+  metric: "sharpe_ratio"  # 优化指标: sharpe_ratio, total_return, annual_return
+  param_grid:  # 参数网格（示例）
+    short_window: [5, 10, 15, 20]
+    long_window: [20, 30, 40, 50]
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "logs/trading.log"
+
